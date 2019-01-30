@@ -1,20 +1,20 @@
 //
-//  ADUnitField.h
-//  ADUnitField
+//  DVUnitField.h
+//  DVUnitField
 //
 //  Created by David on 2018/12/17.
-//  Copyright © 2018年 ADIOS. All rights reserved.
+//  Copyright © 2018年 DVIOS. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-@class ADUnitField;
+@class DVUnitField;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ADUnitFieldDelegate <UITextFieldDelegate>
+@protocol DVUnitFieldDelegate <UITextFieldDelegate>
 
 @optional
-- (BOOL)unitField:(ADUnitField *)uniField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+- (BOOL)unitField:(DVUnitField *)uniField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 
 @end
 
@@ -25,19 +25,19 @@ NS_ASSUME_NONNULL_BEGIN
  - WLUnitFieldStyleBorder: 边框样式, UnitField 的默认样式
  - WLUnitFieldStyleUnderline: 下滑线样式
  */
-typedef NS_ENUM(NSUInteger, ADUnitFieldStyle) {
-    ADUnitFieldStyleBorder,
-    ADUnitFieldStyleUnderline
+typedef NS_ENUM(NSUInteger, DVUnitFieldStyle) {
+    DVUnitFieldStyleBorder,
+    DVUnitFieldStyleUnderline
 };
 
-@interface ADUnitField : UIControl <UIKeyInput>
+@interface DVUnitField : UIControl <UIKeyInput>
 
 - (instancetype)initWithInputUnitCount:(NSUInteger)count;
-- (instancetype)initWithStyle:(ADUnitFieldStyle)style count:(NSUInteger)count;
+- (instancetype)initWithStyle:(DVUnitFieldStyle)style count:(NSUInteger)count;
 
-@property (nullable, nonatomic, weak) id<ADUnitFieldDelegate> delegate;
+@property (nullable, nonatomic, weak) id<DVUnitFieldDelegate> delegate;
 
-@property (nonatomic, assign, readonly) ADUnitFieldStyle style;   /// <边框和下划线
+@property (nonatomic, assign, readonly) DVUnitFieldStyle style;   /// <边框和下划线
 @property (nonatomic, assign, readonly) NSUInteger inputUnitCount;  /// <允许输入的行数
 
 // 每个item直接的间距

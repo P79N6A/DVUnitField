@@ -1,22 +1,22 @@
 //
-//  ADUnitField.m
-//  ADUnitField
+//  DVUnitField.m
+//  DVUnitField
 //
 //  Created by David on 2018/12/17.
-//  Copyright © 2018年 ADIOS. All rights reserved.
+//  Copyright © 2018年 DVIOS. All rights reserved.
 //
 
-#import "ADUnitField.h"
+#import "DVUnitField.h"
 
-@interface ADUnitField ()
+@interface DVUnitField ()
 
-@property (nonatomic, assign) ADUnitFieldStyle style;
+@property (nonatomic, assign) DVUnitFieldStyle style;
 @property (nonatomic, strong) CALayer *cursorLayer; ///< 光标颜色
 @property (nonatomic, strong) NSMutableArray <NSString*>*characterArray;
 
 @end
 
-@implementation ADUnitField
+@implementation DVUnitField
 {
     CGContextRef _ctx;  /// < 上下文
     UIColor *_backgroundColor;  /// <背景色
@@ -24,10 +24,10 @@
 
 - (instancetype)initWithInputUnitCount:(NSUInteger)count
 {
-    return [self initWithStyle:ADUnitFieldStyleBorder count:count];
+    return [self initWithStyle:DVUnitFieldStyleBorder count:count];
 }
 
-- (instancetype)initWithStyle:(ADUnitFieldStyle)style count:(NSUInteger)count
+- (instancetype)initWithStyle:(DVUnitFieldStyle)style count:(NSUInteger)count
 {
     self = [super initWithFrame:CGRectZero];
     if (!self) return nil;
@@ -140,7 +140,7 @@
 {
     [_backgroundColor setFill];
     if (clip){
-        CGFloat radius = _style == ADUnitFieldStyleBorder ? _borderRadius : 0;
+        CGFloat radius = _style == DVUnitFieldStyleBorder ? _borderRadius : 0;
         CGContextAddPath(_ctx, [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius].CGPath);
         CGContextClip(_ctx);
     }
@@ -151,7 +151,7 @@
 - (void)_drawBorder:(CGRect)rect unitSize:(CGSize)unitSize
 {
     CGRect bounds = CGRectInset(rect, _borderWidth*0.5, _borderWidth*0.5);
-    if (_style == ADUnitFieldStyleBorder)
+    if (_style == DVUnitFieldStyleBorder)
     {
         [self.tintColor setStroke];
         CGContextSetLineWidth(_ctx, _borderWidth);
@@ -195,7 +195,7 @@
     NSDictionary *attr = @{NSForegroundColorAttributeName:_textColor,NSFontAttributeName:_textFont};
     for (int i = 0; i < self.characterArray.count; i++) {
         CGRect unitRect = CGRectMake(i*(size.width + _unitSpace), 0, size.width, size.height);
-        CGFloat yOffset = _style == ADUnitFieldStyleBorder ? 0 : _borderWidth;
+        CGFloat yOffset = _style == DVUnitFieldStyleBorder ? 0 : _borderWidth;
         if (!self.secureTextEntry) // 非加密
         {
             NSString *subString = [self.characterArray objectAtIndex:i];
@@ -218,7 +218,7 @@
 {
     if (_trackTintColor == nil) return;
     
-    if (_style == ADUnitFieldStyleBorder)
+    if (_style == DVUnitFieldStyleBorder)
     {
         if (_unitSpace < 2) return;
        
@@ -472,7 +472,7 @@
     CGRect unitRect = CGRectMake((unitSize.width + _unitSpace)*self.characterArray.count , 0, unitSize.width, unitSize.height);
     // 最后一个滑块的中心
     unitRect = CGRectInset(unitRect, unitRect.size.width/2-1, (unitRect.size.height - _textFont.pointSize)/2);
-    CGFloat offset = _style == ADUnitFieldStyleBorder ? 0 :1;
+    CGFloat offset = _style == DVUnitFieldStyleBorder ? 0 :1;
     unitRect.origin.y -= offset;
     [CATransaction begin];
     [CATransaction setDisableActions:NO];
